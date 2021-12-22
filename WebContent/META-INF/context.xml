@@ -31,7 +31,7 @@
        auth = "Container"
        type="javax.sql.DataSource"
        driverClassName = "oracle.jdbc.driver.OracleDriver"
-       url="jdbc:oracle:thin:@//localhost:1521/xepdb1"
+       url="jdbc:oracle:thin:@//localhost:1522/xepdb1"
        username="SON"
        password="1234"
        maxWait = "5000"   

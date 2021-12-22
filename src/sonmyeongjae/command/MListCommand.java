@@ -1,7 +1,9 @@
 package sonmyeongjae.command;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,7 +13,7 @@ import sonmyeongjae.Dto.MemberDto;
 public class MListCommand implements MCommand {
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) {
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		// 1.DB에 목록을 반환하는 메소드를 실행
 		MemberDao dao = new MemberDao();
 		//2. 반환하는 목록을 requestScope 저장

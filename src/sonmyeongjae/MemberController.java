@@ -22,20 +22,23 @@ public class MemberController extends HttpServlet {
 
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String viewPage =null;
 		String uri = request.getRequestURI();
 		String com =uri.substring(uri.lastIndexOf("/")+1, uri.lastIndexOf(".do"));
+		String viewPage ="";
 		
 		if(com != null && com.trim().equals("list")) {
 			MCommand command = new MListCommand();
 			command.execute(request, response);
 			viewPage = "/WEB-INF/view/mList.jsp";
+			
 		}else if(com != null && com.trim().equals("insertForm")) {
 			viewPage = "/WEB-INF/view/mInsertForm.jsp";
+			
 		}else if(com != null && com.trim().equals("insert")) {
 			MCommand command = new MInsertCommand();
 			command.execute(request, response);
 			viewPage = "list.do";
+			
 		}else if(com !=null && com.trim().equals("view")) {
 			//1.Model 부분의 서비스를 실행 
 			MCommand command = new MViewCommand();

@@ -23,7 +23,7 @@ public class MemberDao {
 		try {
 			Context initContext = new InitialContext();
 			Context envContext = (Context) initContext.lookup("java:/comp/env");
-			ds = (DataSource) envContext.lookup("jdbc/jsp");
+			ds = (DataSource) envContext.lookup("jdbc/JSP");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -64,10 +64,9 @@ public class MemberDao {
 		}
 		return dtos;
 	}
-	public boolean insert(MemberDto dto) {
+	public void insert(MemberDto dto) {
 		// TODO Auto-generated method stub
-		String sql = "insert into member(id, pwd, name, email, doinDate) values(?,?,?,?, now())";
-		boolean check = false;
+		String sql = "insert into member(id, pwd, name, email, joinDate) values(?,?,?,?,SYSDATE)";
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -76,20 +75,14 @@ public class MemberDao {
 			pstmt.setString(3, dto.getName());
 			pstmt.setString(4, dto.getEmail());
 			
-			int x = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			
-			if(x<1) {
-				System.out.println("정상적으로 저장되지 않았습니다.");
-				
-			}else {
-				check=true;
-			}
 			pstmt.close();
 		}catch(SQLException ex) {
-			System.out.println("SQL insert 오류 :" + ex.getLocalizedMessage());
-			check=false;
+			
+		}finally {
+			close();
 		}
-		return check;
 		
 	}
 	public MemberDto view(String id) {
